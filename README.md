@@ -18,3 +18,12 @@ you can use this image, for just simply start back-end for Forest Admin.
 This image generate Forest Admin project inside container then start it, it takes some time.
 So you must build your system in understanding:
 *"Just start admin backend once, on database start, and forgot about it"*
+
+### Contribut
+
+To publish the docker image:
+
+```bash
+docker build -t leovs09/lumber .
+docker push leovs09/lumber
+```
