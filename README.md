@@ -19,6 +19,47 @@ This image generate Forest Admin project inside container then start it, it take
 So you must build your system in understanding:
 *"Just start admin backend once, on database start, and forgot about it"*
 
+### Example
+
+For start service from one command
+
+```bash
+docker run \
+    -e DATABASE_SCHEMA="<your-database-schema>" \
+    -e DATABASE_SSL="false" \
+    -e DATABASE_URL="postgres://<root-username>:<root-user-password>@<database-host>:<database-port>/<database-name>" \
+    -e APP_NAME="<application name>" \
+    -e FOREST_EMAIL="example@mail.com" \
+    -e FOREST_TOKEN="<forest-token>" \
+    -e APPLICATION_HOST="localhost" \
+    -e APPLICATION_PORT="3310" \
+    -it leovs09/lumber
+```
+
+- APPLICATION_HOST - Hostname of your admin backend application.
+- APPLICATION_PORT - Port of your admin backend application.
+- DATABASE_SSL - Use SSL for database connection (true | false).
+- DATABASE_SCHEMA - Your database schema.
+- DATABASE_URL - The database credentials with a connection URL.
+- FOREST_EMAIL - Your Forest Admin account email.
+- FOREST_TOKEN - Your Forest Admin account token.
+
+Or through docker compose
+
+```yml
+# docker-compose.yml
+version: "3"
+
+services:
+   admin:
+      image: leovs09/lumber
+      container_name: admin
+      ports:
+         - 3310:3310
+      env_file:
+         - ./.env.admin
+```
+
 ### Contribut
 
 To publish the docker image:
