@@ -59,6 +59,12 @@ services:
          - 3310:3310
       env_file:
          - ./.env.admin
+      volumes:
+         - admin-backend:/usr/src/app
+
+volumes:
+  admin-backend:
+
 ```
 
 ### Contribut

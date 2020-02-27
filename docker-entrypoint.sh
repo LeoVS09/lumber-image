@@ -1,17 +1,34 @@
 #!/bin/bash
 set -e
 
-lumber generate "${APPLICATION_NAME:-$APP_NAME}" \
-    -c "$DATABASE_URL" \
-    -S "${DATABASE_SSL:-false}" \
-    -s "$DATABASE_SCHEMA" \
-    -H "$APPLICATION_HOST" \
-    -p "$APPLICATION_PORT" \
-    --email "$FOREST_EMAIL" \
-    --token "$FOREST_TOKEN"
+if test ! "$APPLICATION_NAME"; then
+    APPLICATION_NAME=$APP_NAME
+fi
 
-cd "${APPLICATION_NAME:-$APP_NAME}"
+echo "Application is $APPLICATION_NAME"
 
-npm install -s
+if [ ! -d "$APPLICATION_NAME" ]; then
+
+    echo "Will generate lumber backend service for $APPLICATION_NAME"
+
+    lumber generate "$APPLICATION_NAME" \
+        --connection-url "$DATABASE_URL" \
+        --ssl "${DATABASE_SSL:-false}" \
+        --schema "$DATABASE_SCHEMA" \
+        --application-host "$APPLICATION_HOST" \
+        --application-port "$APPLICATION_PORT" \
+        --email "$FOREST_EMAIL" \
+        --token "$FOREST_TOKEN"
+
+
+    cd "$APPLICATION_NAME"
+    echo "Service generated successfully"
+
+    echo "Install dependencies"
+    npm install -s
+else
+    cd "$APPLICATION_NAME"
+    echo "Service $APPLICATION_NAME already was generated"
+fi
 
 exec "$@"
