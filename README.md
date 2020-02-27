@@ -36,13 +36,14 @@ docker run \
     -it leovs09/lumber
 ```
 
-- `APPLICATION_HOST` - Hostname of your admin backend application.
-- `APPLICATION_PORT` - Port of your admin backend application.
-- `DATABASE_SSL` - Use SSL for database connection (true | false).
 - `DATABASE_SCHEMA` - Your database schema.
+- `DATABASE_SSL` - Use SSL for database connection (true | false).
 - `DATABASE_URL` - The database credentials with a connection URL.
+- `APP_NAME` - name of your application in forest admin.
 - `FOREST_EMAIL` - Your Forest Admin account email.
 - `FOREST_TOKEN` - Your Forest Admin account token.
+- `APPLICATION_HOST` - Hostname of your admin backend application.
+- `APPLICATION_PORT` - Port of your admin backend application.
 
 Or through docker compose
 
